@@ -1,0 +1,35 @@
+# YamBMS ( Yet another multi-BMS Merging Solution )
+
+# This YAML is free software: you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation, either version 3
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+# See the GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program. If not, see <http://www.gnu.org/licenses/gpl.html>.
+
+substitutions:
+  bms_model: "Shoto Smart Lithium 48100"
+  bms_protocol: "RS485"
+
+# +--------------------------------------+
+# | Component settings                   |
+# +--------------------------------------+
+
+external_components:
+  - source: github://hpeyerl/esphome-shoto_smartli@main
+    refresh: 0s
+
+uart:
+  - id: !extend ${shoto_modbus_uart_id}
+    baud_rate: ${shoto_modbus_baud_rate}
+
+shoto_modbus:
+  id: ${shoto_modbus_id}
+  uart_id: ${shoto_modbus_uart_id}
+  rx_timeout: ${shoto_modbus_rx_timeout}
